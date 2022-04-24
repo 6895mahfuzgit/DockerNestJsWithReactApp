@@ -11,19 +11,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
+const user_service_1 = require("./user.service");
 let UserController = class UserController {
-    all() {
-        return ['users'];
+    constructor(userService) {
+        this.userService = userService;
+    }
+    async all() {
+        return await this.userService.all();
     }
 };
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UserController.prototype, "all", null);
 UserController = __decorate([
-    (0, common_1.Controller)('users')
+    (0, common_1.Controller)('users'),
+    __metadata("design:paramtypes", [user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=user.controller.js.map

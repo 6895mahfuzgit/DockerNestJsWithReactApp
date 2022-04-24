@@ -1,3 +1,6 @@
+import { UserService } from './user.service';
 export declare class UserController {
-    all(): string[];
+    private userService;
+    constructor(userService: UserService);
+    all(): Promise<import("./models/user.entity").User[]>;
 }
