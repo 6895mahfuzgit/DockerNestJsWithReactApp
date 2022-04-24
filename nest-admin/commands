@@ -1,0 +1,4 @@
+1.docker-compose up
+2.nest generate module user
+3.nest generate controller user
+4. npm install --save @nestjs/typeorm typeorm mysql     
