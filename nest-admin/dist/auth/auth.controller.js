@@ -37,6 +37,10 @@ let AuthController = class AuthController {
         response.cookie('jwt', jwt, { httpOnly: true });
         return user;
     }
+    async user(request) {
+        const cookie = request.cookies['jwt'];
+        const data = await this.jwtService.verifyAsync(cookie);
+    }
 };
 __decorate([
     (0, common_1.Post)("register"),
@@ -54,6 +58,13 @@ __decorate([
     __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Get)('user'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "user", null);
 AuthController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [user_service_1.UserService, jwt_1.JwtService])
