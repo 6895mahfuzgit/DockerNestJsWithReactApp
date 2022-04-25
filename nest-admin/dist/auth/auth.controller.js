@@ -14,9 +14,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
+const user_service_1 = require("../user/user.service");
 let AuthController = class AuthController {
+    constructor(userService) {
+        this.userService = userService;
+    }
     async register(body) {
-        return body;
+        return this.userService.create(body);
     }
 };
 __decorate([
@@ -27,7 +31,8 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "register", null);
 AuthController = __decorate([
-    (0, common_1.Controller)()
+    (0, common_1.Controller)(),
+    __metadata("design:paramtypes", [user_service_1.UserService])
 ], AuthController);
 exports.AuthController = AuthController;
 //# sourceMappingURL=auth.controller.js.map
