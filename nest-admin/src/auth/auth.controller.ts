@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { RegisterDto } from './models/register.dto';
 import{Response,Request} from "express";
+import { toUserInfo } from "src/_helpers/helper";
 
 @Controller()
 export class AuthController {
@@ -28,7 +29,7 @@ export class AuthController {
           throw new NotFoundException("User not found");
       }
 
-      const jwt=await this.jwtService.signAsync({ id :user.id})
+      const jwt=await this.jwtService.signAsync({ id:user.id})
       response.cookie('jwt',jwt,{httpOnly:true});
       return user;
     }
@@ -37,7 +38,13 @@ export class AuthController {
     @Get('user')
     async user(@Req() request:Request){
         const cookie=request.cookies['jwt'];
+    var ss=""
+     
         const data=await this.jwtService.verifyAsync(cookie);
+        let user= (await this.userService.findOne({ id: data['id']})) ;
+        return toUserInfo(user);
     }
+
+  
 
 }
