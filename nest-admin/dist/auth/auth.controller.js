@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const user_service_1 = require("../user/user.service");
 const register_dto_1 = require("./models/register.dto");
+const helper_1 = require("../_helpers/helper");
 let AuthController = class AuthController {
     constructor(userService, jwtService) {
         this.userService = userService;
@@ -39,7 +40,10 @@ let AuthController = class AuthController {
     }
     async user(request) {
         const cookie = request.cookies['jwt'];
+        var ss = "";
         const data = await this.jwtService.verifyAsync(cookie);
+        let user = (await this.userService.findOne({ id: data['id'] }));
+        return (0, helper_1.toUserInfo)(user);
     }
 };
 __decorate([
