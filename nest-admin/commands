@@ -4,3 +4,6 @@
 4. npm install --save @nestjs/typeorm typeorm mysql     
 5.nest generate module auth   
 6.nest generate controller auth   
+
+7.npm i bcrypt
+8.npm i -D @types/bcrypt
