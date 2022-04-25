@@ -57,7 +57,7 @@ __decorate([
     (0, common_1.Post)("login"),
     __param(0, (0, common_1.Body)('email')),
     __param(1, (0, common_1.Body)('password')),
-    __param(2, (0, common_1.Res)({ passthrough: true })),
+    __param(2, (0, common_1.Res)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
