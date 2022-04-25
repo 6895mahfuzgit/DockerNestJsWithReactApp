@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, NotFoundException, Post } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { RegisterDto } from './models/register.dto';
 
@@ -16,4 +16,16 @@ export class AuthController {
         }
         return this.userService.create(body);
     }
+
+    @Post("login")
+    async login(@Body('email') email:string,@Body('password') password:string ){
+    const user=await this.userService.findOne({email: email,password:password});
+
+      if(!user){
+          throw new NotFoundException("User not found");
+      }
+
+      return user;
+    }
+
 }
