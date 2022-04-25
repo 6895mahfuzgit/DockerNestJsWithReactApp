@@ -15,21 +15,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("../user/user.service");
+const register_dto_1 = require("./models/register.dto");
 let AuthController = class AuthController {
     constructor(userService) {
         this.userService = userService;
     }
     async register(body) {
+        if (body.password !== body.password_confirm) {
+            throw new common_1.BadRequestException("Password don't matche!");
+        }
         return this.userService.create(body);
+    }
+    async login(email, password) {
+        const user = await this.userService.findOne({ email: email, password: password });
+        if (!user) {
+            throw new common_1.NotFoundException("User not found");
+        }
+        return user;
     }
 };
 __decorate([
     (0, common_1.Post)("register"),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [register_dto_1.RegisterDto]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "register", null);
+__decorate([
+    (0, common_1.Post)("login"),
+    __param(0, (0, common_1.Body)('email')),
+    __param(1, (0, common_1.Body)('password')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "login", null);
 AuthController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [user_service_1.UserService])
