@@ -1,3 +1,3 @@
 export declare class AuthController {
-    register(): Promise<string>;
+    register(body: any): Promise<any>;
 }
