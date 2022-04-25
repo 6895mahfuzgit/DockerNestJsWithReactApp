@@ -7,3 +7,5 @@
 
 7.npm i bcrypt
 8.npm i -D @types/bcrypt
+
+9.npm install class-validator --save
