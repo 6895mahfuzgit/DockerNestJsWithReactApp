@@ -57,12 +57,13 @@ __decorate([
     (0, common_1.Post)("login"),
     __param(0, (0, common_1.Body)('email')),
     __param(1, (0, common_1.Body)('password')),
-    __param(2, (0, common_1.Res)()),
+    __param(2, (0, common_1.Res)({ passthrough: true })),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String, String, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([
+    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.Get)('user'),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
