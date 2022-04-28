@@ -11,3 +11,5 @@
 9.npm install class-validator --save
 10.npm install --save @nestjs/jwt passport-jwt
 11.npm install --save-dev  @types/passport-jwt
+
+12.nest generate interceptor auth/auth
