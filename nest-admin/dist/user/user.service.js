@@ -24,11 +24,32 @@ let UserService = class UserService {
     async all() {
         return this.userRepository.find();
     }
+    async paginate(page = 1) {
+        const take = 2;
+        const [users, total] = await this.userRepository.findAndCount({
+            take,
+            skip: (page - 1) * take
+        });
+        return {
+            data: users,
+            meta: {
+                total,
+                page,
+                last_page: Math.ceil(total / take)
+            }
+        };
+    }
     async create(data) {
         return this.userRepository.save(data);
     }
     async findOne(condition) {
         return this.userRepository.findOne(condition);
+    }
+    async update(id, data) {
+        return this.userRepository.update(id, data);
+    }
+    async delete(id) {
+        return this.userRepository.delete(id);
     }
 };
 UserService = __decorate([
