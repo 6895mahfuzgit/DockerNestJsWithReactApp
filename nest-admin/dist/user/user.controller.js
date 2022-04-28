@@ -27,6 +27,9 @@ let UserController = class UserController {
     async create(body) {
         return this.userService.create(body);
     }
+    async get(id) {
+        return this.userService.findOne({ id });
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -41,6 +44,13 @@ __decorate([
     __metadata("design:paramtypes", [user_create_dto_1.UserCreateDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "get", null);
 UserController = __decorate([
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
