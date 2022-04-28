@@ -13,3 +13,4 @@
 11.npm install --save-dev  @types/passport-jwt
 
 12.nest generate interceptor auth/auth
+13.nest generate guard auth/auth
