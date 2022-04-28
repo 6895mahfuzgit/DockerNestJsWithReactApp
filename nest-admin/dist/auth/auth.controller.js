@@ -18,6 +18,7 @@ const jwt_1 = require("@nestjs/jwt");
 const user_service_1 = require("../user/user.service");
 const register_dto_1 = require("./models/register.dto");
 const helper_1 = require("../_helpers/helper");
+const auth_interceptor_1 = require("./auth.interceptor");
 let AuthController = class AuthController {
     constructor(userService, jwtService) {
         this.userService = userService;
@@ -63,7 +64,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
 __decorate([
-    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
+    (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor, auth_interceptor_1.AuthInterceptor),
     (0, common_1.Get)('user'),
     __param(0, (0, common_1.Req)()),
     __metadata("design:type", Function),
