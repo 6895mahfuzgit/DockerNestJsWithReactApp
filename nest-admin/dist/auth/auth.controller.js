@@ -44,6 +44,10 @@ let AuthController = class AuthController {
         let user = (await this.userService.findOne({ id: data['id'] }));
         return (0, helper_1.toUserInfo)(user);
     }
+    async logout(res) {
+        res.clearCookie('jwt');
+        return { message: 'Success.' };
+    }
 };
 __decorate([
     (0, common_1.Post)("register"),
@@ -68,6 +72,13 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "user", null);
+__decorate([
+    (0, common_1.Post)("logout"),
+    __param(0, (0, common_1.Res)({ passthrough: true })),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "logout", null);
 AuthController = __decorate([
     (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.Controller)(),
