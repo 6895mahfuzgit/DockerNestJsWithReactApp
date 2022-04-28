@@ -1,4 +1,4 @@
-import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Post, Put, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserCreateDto } from './models/user-create.dto';
 import { UserUpdateDto } from './models/user-update.dto';
@@ -13,9 +13,12 @@ export class UserController {
     constructor(private userService: UserService) { }
 
     @Get()
-    async all() {
-        return await this.userService.all();
+    async all(@Query('page') page:number=1) {
+        //return await this.userService.all();
+        return await this.userService.paginate(page)
     }
+
+
 
     @Post()
     async create(@Body() body:UserCreateDto):Promise<User>{
