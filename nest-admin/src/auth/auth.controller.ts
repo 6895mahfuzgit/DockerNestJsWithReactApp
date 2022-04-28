@@ -4,6 +4,7 @@ import { UserService } from 'src/user/user.service';
 import { RegisterDto } from './models/register.dto';
 import{Response,Request} from "express";
 import { toUserInfo } from "src/_helpers/helper";
+import { AuthInterceptor } from './auth.interceptor';
 
 @Controller()
 export class AuthController {
@@ -35,7 +36,7 @@ export class AuthController {
     }
 
 
-    @UseInterceptors(ClassSerializerInterceptor)
+    @UseInterceptors(ClassSerializerInterceptor,AuthInterceptor)
     @Get('user')
     async user(@Req() request:Request){
         const cookie=request.cookies['jwt'];
