@@ -4,8 +4,9 @@ import { UserService } from 'src/user/user.service';
 import { RegisterDto } from './models/register.dto';
 import{Response,Request} from "express";
 import { toUserInfo } from "src/_helpers/helper";
-import { AuthInterceptor } from './auth.interceptor';
+//import { AuthInterceptor } from './auth.interceptor';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller()
 export class AuthController {
 
@@ -36,12 +37,10 @@ export class AuthController {
     }
 
 
-    @UseInterceptors(ClassSerializerInterceptor,AuthInterceptor)
+    
     @Get('user')
     async user(@Req() request:Request){
-        const cookie=request.cookies['jwt'];
-    var ss=""
-     
+        const cookie=request.cookies['jwt']; 
         const data=await this.jwtService.verifyAsync(cookie);
         let user= (await this.userService.findOne({ id: data['id']})) ;
         return toUserInfo(user);
