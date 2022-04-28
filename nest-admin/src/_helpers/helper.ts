@@ -1,5 +1,5 @@
-import { UserInfo } from "src/auth/models/userinfo.dto";
-import { User } from "src/user/models/user.entity";
+import { UserInfo } from "../user/models/userinfo.dto";
+import { User } from "../user/models/user.entity";
 
 export function toUserInfo(user:User){
     var result= new UserInfo();
