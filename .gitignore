@@ -7,3 +7,7 @@ nest-admin/dist/user/user.service.d.ts
 nest-admin/dist/user/user.service.d.ts
 nest-admin/dist/user/user.service.js
 nest-admin/dist/user/user.service.d.ts
+*.map
+*.js
+*.js
+*.ibd
