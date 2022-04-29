@@ -28,7 +28,7 @@ let AuthController = class AuthController {
         if (body.password !== body.password_confirm) {
             throw new common_1.BadRequestException("Password don't matche!");
         }
-        return this.userService.create(body);
+        return this.userService.create(Object.assign(Object.assign({}, body), { role: { id: 2 } }));
     }
     async login(email, password, response) {
         const user = await this.userService.findOne({ email: email, password: password });

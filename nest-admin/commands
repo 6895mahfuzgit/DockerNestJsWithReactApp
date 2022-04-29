@@ -15,3 +15,7 @@
 12.nest generate interceptor auth/auth
 13.nest generate guard auth/auth
 14.nest generate module role   
+
+15.nest generate module permission
+16.nest generate service permission   
+17.nest generate controller permission   
