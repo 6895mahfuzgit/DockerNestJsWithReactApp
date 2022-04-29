@@ -12,6 +12,6 @@ import { AbstractService } from './abstract/abstract.service';
     exports:[
         JwtModule
     ],
-    providers: [AbstractService]
+    providers: []
 })
 export class CommonModule {}
