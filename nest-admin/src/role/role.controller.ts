@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Permission } from 'src/permission/models/permission.entity';
 import { Role } from './models/role.entity';
 import { RoleService } from './role.service';
 
@@ -13,8 +14,8 @@ export class RoleController {
     }
 
     @Post()
-    async create(@Body('name') name:string):Promise<Role>{
-      return this.roleService.create({name});
+    async create(@Body('name') name:string,@Body('permissions') ids:Permission[]):Promise<Role>{
+      return this.roleService.create({name, permissions: ids.map(id=>({id}))});
     } 
 
     @Get(':id')
@@ -24,8 +25,9 @@ export class RoleController {
 
     @Put(':id')
     async update(@Param('id') id :number,
-                 @Body('name') name:string){
-        await this.roleService.update(id,{name});
+                 @Body('name') name:string,
+                 @Body('permissions') ids:Permission[]){
+        await this.roleService.update(id,{name,permissions: ids.map(id=>({id}))});
        return this.roleService.findOne({id});
     }
 
