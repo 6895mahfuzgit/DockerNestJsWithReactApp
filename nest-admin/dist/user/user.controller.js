@@ -34,14 +34,14 @@ let UserController = class UserController {
         this.userService = userService;
     }
     async all(page = 1) {
-        return await this.userService.paginate(page);
+        return await this.userService.paginate(page, ['role']);
     }
     async create(body) {
         const { role_id } = body, data = __rest(body, ["role_id"]);
         return this.userService.create(Object.assign(Object.assign({}, data), { role: { id: role_id } }));
     }
     async get(id) {
-        return this.userService.findOne({ id });
+        return this.userService.findOne({ id }, ['role']);
     }
     async update(id, body) {
         const { role_id } = body, data = __rest(body, ["role_id"]);
