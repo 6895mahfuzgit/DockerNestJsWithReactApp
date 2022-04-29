@@ -27,8 +27,14 @@ export class RoleController {
     async update(@Param('id') id :number,
                  @Body('name') name:string,
                  @Body('permissions') ids:Permission[]){
-        await this.roleService.update(id,{name,permissions: ids.map(id=>({id}))});
-       return this.roleService.findOne({id});
+        await this.roleService.update(id,{name});
+
+       const role=await this.roleService.findOne({id});
+
+       return this.roleService.create({
+         ...role,
+         permissions: ids.map(id=>({id}))
+       });
     }
 
     @Delete(':id')
