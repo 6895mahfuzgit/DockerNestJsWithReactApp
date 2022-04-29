@@ -22,7 +22,12 @@ export class UserController {
 
     @Post()
     async create(@Body() body:UserCreateDto):Promise<User>{
-      return this.userService.create(body);
+
+       const {role_id,...data} =body;
+      return this.userService.create({
+        ...data,
+        role: { id : role_id}
+      });
     } 
 
     @Get(':id')
@@ -33,7 +38,14 @@ export class UserController {
     @Put(':id')
     async update(@Param('id') id :number,
                  @Body() body:UserUpdateDto){
-        await this.userService.update(id,body);
+
+        const {role_id,...data} =body;          
+        await this.userService.update(id,
+             {
+                ...data,
+                role: { id : role_id}
+              }
+            );
        return this.userService.findOne({id});
     }
 
