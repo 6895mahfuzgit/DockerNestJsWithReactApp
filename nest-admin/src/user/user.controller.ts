@@ -15,7 +15,7 @@ export class UserController {
     @Get()
     async all(@Query('page') page:number=1) {
         //return await this.userService.all();
-        return await this.userService.paginate(page)
+        return await this.userService.paginate(page,['role'])
     }
 
 
@@ -32,7 +32,7 @@ export class UserController {
 
     @Get(':id')
     async get(@Param('id') id :number){
-        return this.userService.findOne({id});
+        return this.userService.findOne({id},['role']);
     }
 
     @Put(':id')

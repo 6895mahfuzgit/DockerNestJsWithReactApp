@@ -7,16 +7,17 @@ export abstract class AbstractService {
 
     protected constructor(protected repository:Repository<any>){}
 
-    async all(): Promise<any[]> {
-        return this.repository.find();
+    async all(relations=[]): Promise<any[]> {
+        return this.repository.find({relations});
     }
    
-    async paginate(page:number=1):Promise<PagiratedResult>{
+    async paginate(page:number=1,relations=[]):Promise<PagiratedResult>{
 
        const take=2;
        const[data,total]=await this.repository.findAndCount({
            take,
-           skip: (page-1)*take
+           skip: (page-1)*take,
+           relations
        });
 
        return {
