@@ -18,4 +18,6 @@
 
 15.nest generate module permission
 16.nest generate service permission   
-17.nest generate controller permission   
+17.nest generate controller permission
+
+18.nest generate service common/abstract   
