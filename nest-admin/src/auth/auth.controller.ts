@@ -19,7 +19,8 @@ export class AuthController {
         if(body.password!==body.password_confirm){
             throw new BadRequestException("Password don't matche!");
         }
-        return this.userService.create(body);
+        
+        return this.userService.create({...body,role:{id:2}});
     }
 
     @Post("login")
