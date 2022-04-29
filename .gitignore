@@ -1,6 +1,6 @@
 nest-admin/node_modules/*
 
-nest-admin/dist/*/*
+nest-admin/dist
 nest-admin/dist/tsconfig.build.tsbuildinfo
 nest-admin/dist/tsconfig.build.tsbuildinfo
 nest-admin/dist/user/user.service.d.ts
