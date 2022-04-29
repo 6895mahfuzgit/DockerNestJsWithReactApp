@@ -13,7 +13,7 @@ export class RoleController {
     }
 
     @Post()
-    async create(@Body() name:string):Promise<Role>{
+    async create(@Body('name') name:string):Promise<Role>{
       return this.roleService.create({name});
     } 
 
@@ -24,7 +24,7 @@ export class RoleController {
 
     @Put(':id')
     async update(@Param('id') id :number,
-                 @Body() name:string){
+                 @Body('name') name:string){
         await this.roleService.update(id,{name});
        return this.roleService.findOne({id});
     }
