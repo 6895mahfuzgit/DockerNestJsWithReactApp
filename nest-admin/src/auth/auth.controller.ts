@@ -5,13 +5,16 @@ import { RegisterDto } from './models/register.dto';
 import{Response,Request} from "express";
 import { toUserInfo } from "src/_helpers/helper";
 import { AuthGuard } from './auth.guard';
+import { AuthService } from './auth.service';
 //import { AuthInterceptor } from './auth.interceptor';
 
 @UseInterceptors(ClassSerializerInterceptor)
 @Controller()
 export class AuthController {
 
-    constructor(private userService:UserService,private jwtService:JwtService) {
+    constructor(private userService:UserService,
+                private jwtService:JwtService,
+                private authService:AuthService) {
     }
 
     @Post("register")
@@ -42,9 +45,9 @@ export class AuthController {
     @UseGuards(AuthGuard)    
     @Get('user')
     async user(@Req() request:Request){
-        const cookie=request.cookies['jwt']; 
-        const data=await this.jwtService.verifyAsync(cookie);
-        let user= (await this.userService.findOne({ id: data['id']})) ;
+        
+        const id=await this.authService.userId(request);
+        let user= (await this.userService.findOne({ id: id})) ;
         return toUserInfo(user);
     }
 
