@@ -48,6 +48,7 @@ export class UserController {
 
   }
 
+  @Put('password')
   async updatePassword(@Body('password') password: string,
     @Body('password_confirm') password_confirm: string,
     @Req() request: Request) {
