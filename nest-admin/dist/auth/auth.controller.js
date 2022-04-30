@@ -19,10 +19,12 @@ const user_service_1 = require("../user/user.service");
 const register_dto_1 = require("./models/register.dto");
 const helper_1 = require("../_helpers/helper");
 const auth_guard_1 = require("./auth.guard");
+const auth_service_1 = require("./auth.service");
 let AuthController = class AuthController {
-    constructor(userService, jwtService) {
+    constructor(userService, jwtService, authService) {
         this.userService = userService;
         this.jwtService = jwtService;
+        this.authService = authService;
     }
     async register(body) {
         if (body.password !== body.password_confirm) {
@@ -40,9 +42,8 @@ let AuthController = class AuthController {
         return user;
     }
     async user(request) {
-        const cookie = request.cookies['jwt'];
-        const data = await this.jwtService.verifyAsync(cookie);
-        let user = (await this.userService.findOne({ id: data['id'] }));
+        const id = await this.authService.userId(request);
+        let user = (await this.userService.findOne({ id: id }));
         return (0, helper_1.toUserInfo)(user);
     }
     async logout(res) {
@@ -85,7 +86,9 @@ __decorate([
 AuthController = __decorate([
     (0, common_1.UseInterceptors)(common_1.ClassSerializerInterceptor),
     (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [user_service_1.UserService, jwt_1.JwtService])
+    __metadata("design:paramtypes", [user_service_1.UserService,
+        jwt_1.JwtService,
+        auth_service_1.AuthService])
 ], AuthController);
 exports.AuthController = AuthController;
 //# sourceMappingURL=auth.controller.js.map

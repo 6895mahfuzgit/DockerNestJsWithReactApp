@@ -21,3 +21,5 @@
 17.nest generate controller permission
 
 18.nest generate service common/abstract   
+
+19.nest generate service auth
