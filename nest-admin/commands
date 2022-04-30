@@ -23,3 +23,9 @@
 18.nest generate service common/abstract   
 
 19.nest generate service auth
+
+20.nest generate module product
+21.nest generate service product   
+22.nest generate controller product
+
+23.npm i  multer @types/multer
