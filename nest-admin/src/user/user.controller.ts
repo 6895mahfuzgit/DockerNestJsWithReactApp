@@ -1,6 +1,7 @@
 import { BadRequestException, Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Request } from 'express';
 import { AuthService } from 'src/auth/auth.service';
+import { HasPermission } from 'src/permission/has-permission.decorator';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserCreateDto } from './models/user-create.dto';
 import { UserUpdateDto } from './models/user-update.dto';
@@ -16,6 +17,7 @@ export class UserController {
     private authService: AuthService) { }
 
   @Get()
+  @HasPermission('view_users')
   async all(@Query('page') page: number = 1) {
     //return await this.userService.all();
     return await this.userService.paginate(page, ['role'])
@@ -39,6 +41,7 @@ export class UserController {
   }
 
   @Put('info')
+  @HasPermission('edit_users')
   async updateInfo(@Body() body: UserUpdateDto,
     @Req() request: Request) {
 
@@ -64,6 +67,7 @@ export class UserController {
     return this.userService.findOne({ id });
   }
 
+  @HasPermission('edit_users')
   @Put(':id')
   async update(@Param('id') id: number,
     @Body() body: UserUpdateDto) {

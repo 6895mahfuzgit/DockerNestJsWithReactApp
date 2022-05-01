@@ -1,8 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/auth/auth.guard';
 import { HasPermission } from './has-permission.decorator';
 import { Permission } from './models/permission.entity';
 import { PermissionService } from './permission.service';
 
+@UseGuards(AuthGuard)
 @Controller('permissions')
 export class PermissionController {
 

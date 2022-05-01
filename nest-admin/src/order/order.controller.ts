@@ -2,6 +2,7 @@ import { ClassSerializerInterceptor, Controller, Get, Post, Query, Res, UseGuard
 import { Response } from 'express';
 import { Parser } from 'json2csv';
 import { join } from 'path';
+import { HasPermission } from 'src/permission/has-permission.decorator';
 import { AuthGuard } from '../auth/auth.guard';
 import { OrderItem } from './models/order-item.entity';
 import { Order } from './models/order.entity';
@@ -18,6 +19,7 @@ export class OrderController {
 
     }
 
+    @HasPermission('view_orders')
     @Get()
     async all(@Query('page') page = 1) {
         return this.orderService.paginate(page, ['order_items']);

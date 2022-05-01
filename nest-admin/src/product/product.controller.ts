@@ -1,4 +1,5 @@
 import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UseInterceptors } from '@nestjs/common';
+import { HasPermission } from 'src/permission/has-permission.decorator';
 import { AuthGuard } from '../auth/auth.guard';
 import { ProductCreateDto } from './models/product-create.dto';
 import { ProductUpdateDto } from './models/product-update.dto';
@@ -13,6 +14,7 @@ export class ProductController {
 constructor(private productService:ProductService) {}
 
 @Get()
+@HasPermission('view_products')
 async all(@Query('page') page=1){
     return this.productService.paginate(page);
 }
