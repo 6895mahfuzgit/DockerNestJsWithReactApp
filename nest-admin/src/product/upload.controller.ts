@@ -28,7 +28,7 @@ export class UploadController {
 
   }
 
-    @Get('upload/:path')
+    @Get('uploads/:path')
     async getImage(@Param('path') path,@Res() res:Response){
       res.sendFile(path,{root:'./uploads'});
     }
