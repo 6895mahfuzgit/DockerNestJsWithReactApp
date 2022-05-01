@@ -1,6 +1,9 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../auth/auth.guard';
 import { OrderService } from './order.service';
 
+
+@UseGuards(AuthGuard)
 @Controller('orders')
 export class OrderController {
 
