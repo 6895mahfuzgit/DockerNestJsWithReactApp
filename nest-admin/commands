@@ -29,3 +29,7 @@
 22.nest generate controller product
 
 23.npm i  multer @types/multer
+
+24.nest generate module order
+25.nest generate service order   
+26.nest generate controller order
