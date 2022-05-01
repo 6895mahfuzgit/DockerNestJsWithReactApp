@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UseInterceptors } from '@nestjs/common';
 import { AuthGuard } from '../auth/auth.guard';
 import { ProductCreateDto } from './models/product-create.dto';
 import { ProductUpdateDto } from './models/product-update.dto';
 import { Product } from './models/product.entity';
 import { ProductService } from './product.service';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @UseGuards(AuthGuard)
 @Controller('products')
 export class ProductController {
