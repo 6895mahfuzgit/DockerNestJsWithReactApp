@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("../auth/auth.service");
+const has_permission_decorator_1 = require("../permission/has-permission.decorator");
 const auth_guard_1 = require("../auth/auth.guard");
 const user_create_dto_1 = require("./models/user-create.dto");
 const user_update_dto_1 = require("./models/user-update.dto");
@@ -71,6 +72,7 @@ let UserController = class UserController {
 };
 __decorate([
     (0, common_1.Get)(),
+    (0, has_permission_decorator_1.HasPermission)('view_users'),
     __param(0, (0, common_1.Query)('page')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -92,6 +94,7 @@ __decorate([
 ], UserController.prototype, "get", null);
 __decorate([
     (0, common_1.Put)('info'),
+    (0, has_permission_decorator_1.HasPermission)('edit_users'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
     __metadata("design:type", Function),
@@ -108,6 +111,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updatePassword", null);
 __decorate([
+    (0, has_permission_decorator_1.HasPermission)('edit_users'),
     (0, common_1.Put)(':id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
