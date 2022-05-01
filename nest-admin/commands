@@ -35,3 +35,4 @@
 26.nest generate controller order
 
 27.npm i json2csv  @types/json2csv
+27.nest generate guard permission
