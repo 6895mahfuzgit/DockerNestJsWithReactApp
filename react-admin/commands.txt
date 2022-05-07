@@ -1,1 +1,2 @@
 1.npm install react-router-dom @types/react-router-dom
+2.npm install axios @types/axios
