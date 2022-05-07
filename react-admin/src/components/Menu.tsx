@@ -7,16 +7,10 @@ const Menu = () => {
             <div className="position-sticky pt-3">
                 <ul className="nav flex-column">
                     <li className="nav-item">
-                        <a className="nav-link " aria-current="page" href="/" >
-                           
-                            Dashboard
-                        </a>
+                        <Link to={"/"} className="nav-link">Dashboard</Link>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link " aria-current="page" href="/users">
-                            <span data-feather="home"></span>
-                         Users
-                        </a>
+                    <Link to={"/users"} className="nav-link">Users</Link>
                     </li>
                 </ul>
             </div>
