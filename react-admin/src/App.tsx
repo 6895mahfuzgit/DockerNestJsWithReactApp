@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Menu from './components/Menu';
 import Users from './pages/Users';
 import Dashboard from './pages/Dashboard';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
@@ -15,8 +16,12 @@ function App() {
           <Menu />
 
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            <Dashboard />
-            <Users />
+            <BrowserRouter>
+              <Routes>
+                <Route path={'/'} element={<Dashboard />} />
+                <Route path={'/users'} element={<Users />} />
+              </Routes>
+            </BrowserRouter>
           </main>
         </div>
       </div>
