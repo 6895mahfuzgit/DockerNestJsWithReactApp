@@ -7,9 +7,9 @@ import { User } from '../../models/user';
 const Users = () => {
 
     const [users, setUsers] = useState([]);
-    const[page,setPage]=useState(1);
-    const[lastpage,setLastpage]=useState(0);
-    const[totalRecords,setTotalRecords]=useState(0);
+    const [page, setPage] = useState(1);
+    const [lastpage, setLastpage] = useState(0);
+    const [totalRecords, setTotalRecords] = useState(0);
     useEffect(() => {
 
         (async () => {
@@ -21,19 +21,26 @@ const Users = () => {
 
     }, [page])
 
-    const next=()=>{
-        if(page<lastpage){
-            setPage(page+1)
+    const next = () => {
+        if (page < lastpage) {
+            setPage(page + 1)
         }
-        
+
     }
 
 
-    const preview=()=>{
-        if(page>1){
-            setPage(page-1)
+    const preview = () => {
+        if (page > 1) {
+            setPage(page - 1)
         }
-        
+
+    }
+
+    const del = async (userId: number) => {
+        if (window.confirm('Are you sure to delete this recoed?')) {
+            await axios.delete(`users/${userId}`)
+            setUsers(users.filter((u: User) => u.id != userId));
+        }
     }
 
     return (
@@ -59,7 +66,7 @@ const Users = () => {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td><span >{user.role.name}</span></td>
-                                    <td></td>
+                                    <td><button type="button" className="btn btn-danger" onClick={e => del(user.id)}>Delete</button></td>
                                 </tr>
                             )
                         })}
@@ -72,24 +79,24 @@ const Users = () => {
                 Total Record  <b>{totalRecords}</b>
 
                 <ul className="pagination justify-content-end">
-           {
-               page>1 &&
-                    <li className="page-item">
-                        <a className="page-link" href="#" onClick={preview}>Previous</a>
-                    </li>
-           }
+                    {
+                        page > 1 &&
+                        <li className="page-item">
+                            <a className="page-link" href="#" onClick={preview}>Previous</a>
+                        </li>
+                    }
 
-            {
-                page<lastpage && 
-                    <li className="page-item">
-                        <a className="page-link" href="#" onClick={next}>Next</a>
-                    </li>
-            }
+                    {
+                        page < lastpage &&
+                        <li className="page-item">
+                            <a className="page-link" href="#" onClick={next}>Next</a>
+                        </li>
+                    }
                 </ul>
             </nav>
 
             <div >
-            Page <b> {page}</b> of <b>{lastpage}</b>
+                Page <b> {page}</b> of <b>{lastpage}</b>
             </div>
         </Wrapper>
     )
