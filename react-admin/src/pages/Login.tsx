@@ -10,17 +10,16 @@ const Login = () => {
     const [redirect, setRedirect] = useState(false);
 
 
-   const hasValue= document.cookie.;
+   
 
     const submit = async (e: React.SyntheticEvent) => {
 
         e.preventDefault();
 
-        const response = await axios.post('http://localhost:8000/api/login', {
+        const response = await axios.post('login', {
             email,
             password
-        },{withCredentials: true});
-        //{withCredentials: true}
+        });
         console.log(response);
         setRedirect(true);
     };
