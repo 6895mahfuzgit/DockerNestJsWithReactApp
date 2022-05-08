@@ -15,6 +15,11 @@ const Menu = () => {
                     <li className="nav-item">
                     <Link to={"/users"} className="nav-link">Users</Link>
                     </li>
+
+                    <li className="nav-item">
+                    <Link to={"/login"} className="nav-link">Login</Link>
+                    </li>
+                    
                 </ul>
             </div>
         </nav>

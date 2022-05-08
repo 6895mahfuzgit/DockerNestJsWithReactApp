@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Component } from 'react';
 import '../Login.css'
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
+
 
 
 class Register extends Component {
@@ -11,6 +13,10 @@ class Register extends Component {
     email = ''
     password = ''
     confirm_password = ''
+
+    state={
+        redirect:false
+    }
 
     submit = async (e:React.SyntheticEvent) => {
 
@@ -33,10 +39,14 @@ class Register extends Component {
 
     console.log(response.data);
     
-
+      this.setState({ redirect:true});
     }
 
     render() {
+        if(this.state.redirect){
+            return <Navigate to="/login" />
+        }
+
         return (
             <main className="form-signin">
                 <form onSubmit={this.submit}>

@@ -12,12 +12,20 @@ async function bootstrap() {
   //   origin:'http://localhost:4200',
   //   credentials:true
   // });
+  const options = {
+    origin: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    credentials: true,
+    allowedHeaders: 'Content-Type, Accept',
+  };
 
-  app.enableCors({
-    allowedHeaders:"*",
-    origin: "*",
-    credentials:true
-});
+  app.enableCors(options);
+//   app.enableCors({
+//     allowedHeaders:"*",
+//     origin: "*",
+//     credentials:true
+// });
 
   await app.listen(3000);
 }
