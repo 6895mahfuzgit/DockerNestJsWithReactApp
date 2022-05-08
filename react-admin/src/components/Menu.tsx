@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Menu = () => {
     return (
@@ -7,17 +7,17 @@ const Menu = () => {
             <div className="position-sticky pt-3">
                 <ul className="nav flex-column">
                     <li className="nav-item">
-                        <Link to={"/"} className="nav-link">Dashboard</Link>
+                        <NavLink to={"/"}   className="nav-link">Dashboard</NavLink>
                     </li>
                     <li className="nav-item">
-                     <Link to={"/register"} className="nav-link">Register</Link>
+                     <NavLink to={"/register"} className="nav-link">Register</NavLink>
                     </li>
                     <li className="nav-item">
-                    <Link to={"/users"} className="nav-link">Users</Link>
+                    <NavLink to={"/users"} className="nav-link">Users</NavLink>
                     </li>
 
                     <li className="nav-item">
-                    <Link to={"/login"} className="nav-link">Login</Link>
+                    <NavLink to={"/login"} className="nav-link">Login</NavLink>
                     </li>
                     
                 </ul>
