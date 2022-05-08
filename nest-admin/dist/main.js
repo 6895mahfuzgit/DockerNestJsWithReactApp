@@ -9,11 +9,14 @@ async function bootstrap() {
     app.setGlobalPrefix('api');
     app.useGlobalPipes(new common_1.ValidationPipe());
     app.use(cookieParser());
-    app.enableCors({
-        allowedHeaders: "*",
-        origin: "*",
-        credentials: true
-    });
+    const options = {
+        origin: true,
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        preflightContinue: false,
+        credentials: true,
+        allowedHeaders: 'Content-Type, Accept',
+    };
+    app.enableCors(options);
     await app.listen(3000);
 }
 bootstrap();
