@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Wrapper from '../../components/Wrapper';
 import { User } from '../../models/user';
 
@@ -45,6 +46,9 @@ const Users = () => {
 
     return (
         <Wrapper>
+            <div className='pt-3 pb-2 mb-3 border-bottom'>
+              <Link to={'/users/create'} className='btn btn-sm btn-outline-secondary'>Add </Link>
+            </div>
             <div className="table-responsive">
                 <table className="table table-striped table-sm">
                     <thead>
@@ -66,7 +70,10 @@ const Users = () => {
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
                                     <td><span >{user.role.name}</span></td>
-                                    <td><button type="button" className="btn btn-danger" onClick={e => del(user.id)}>Delete</button></td>
+                                    <td>
+                                        <Link to={`/users/${user.id}/edit`} className='btn  btn-outline-secondary '>Edit</Link> &nbsp;
+                                        <button type="button" className="btn btn-danger" onClick={e => del(user.id)}>Delete</button>
+                                    </td>
                                 </tr>
                             )
                         })}
