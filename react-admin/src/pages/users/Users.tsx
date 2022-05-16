@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React, { Component, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Paginator from '../../components/Paginator';
 import Wrapper from '../../components/Wrapper';
 import { User } from '../../models/user';
 
@@ -22,20 +23,7 @@ const Users = () => {
 
     }, [page])
 
-    const next = () => {
-        if (page < lastpage) {
-            setPage(page + 1)
-        }
-
-    }
-
-
-    const preview = () => {
-        if (page > 1) {
-            setPage(page - 1)
-        }
-
-    }
+   
 
     const del = async (userId: number) => {
         if (window.confirm('Are you sure to delete this recoed?')) {
@@ -81,30 +69,7 @@ const Users = () => {
                 </table>
             </div>
 
-            <nav aria-label="Page navigation example">
-
-                Total Record  <b>{totalRecords}</b>
-
-                <ul className="pagination justify-content-end">
-                    {
-                        page > 1 &&
-                        <li className="page-item">
-                            <a className="page-link" href="#" onClick={preview}>Previous</a>
-                        </li>
-                    }
-
-                    {
-                        page < lastpage &&
-                        <li className="page-item">
-                            <a className="page-link" href="#" onClick={next}>Next</a>
-                        </li>
-                    }
-                </ul>
-            </nav>
-
-            <div >
-                Page <b> {page}</b> of <b>{lastpage}</b>
-            </div>
+            <Paginator page={page} lastpage={lastpage} totalRecords={totalRecords} pageChange={page=>setPage(page)} />
         </Wrapper>
     )
 
