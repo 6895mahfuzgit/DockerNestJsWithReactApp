@@ -1,4 +1,4 @@
-import { ClassSerializerInterceptor, Controller, Get, Post, Query, Res, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, ClassSerializerInterceptor, Controller, Get, Post, Query, Res, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Response } from 'express';
 import { Parser } from 'json2csv';
 import { join } from 'path';
@@ -17,6 +17,11 @@ export class OrderController {
 
     constructor(private orderService: OrderService) {
 
+    }
+
+    @Post()
+    async create(@Body() body: Order): Promise<Order> {
+        return this.orderService.create(body);
     }
 
     @HasPermission('view_orders')
@@ -66,7 +71,7 @@ export class OrderController {
     }
 
     @Get('chart')
-    async chart(){
-      return this.orderService.chart();
+    async chart() {
+        return this.orderService.chart();
     }
 }
