@@ -1,2 +1,4 @@
 1.npm install react-router-dom @types/react-router-dom
 2.npm install axios @types/axios
+3.npm install c3 @types/c3
+4.npm install react-redux @types/react-redux
